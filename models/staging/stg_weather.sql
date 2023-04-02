@@ -1,11 +1,5 @@
 {{ config(materialized='view') }}
 
-with Weather as
-(
-    SELECT *
-    FROM {{ source('staging', 'weather') }}
-)
-
 SELECT 
     CAST(`date` AS date) AS `date`,				
     CAST(prectot AS FLOAT64) AS precipitation,				
@@ -19,7 +13,7 @@ SELECT
     CAST(t2m_max AS FLOAT64) AS max_temperature,		
     CAST(t2m_min AS FLOAT64) AS min_temperature,
     CAST(t2m AS FLOAT64) AS avg_temperature_per_day 			    
-FROM Weather
+FROM {{ source('staging', 'weather') }}
 -- dbt var: is_test_run
 {% if var('is_test_run', default=true) %}
 

@@ -44,5 +44,7 @@ SELECT
     weather.avg_temperature_per_day 
 FROM trips
 INNER JOIN dim_stations AS start_station ON start_station.station_code = trips.start_station_code
+                                         AND start_station.yearid = trips.yearid   
 INNER JOIN dim_stations AS end_station ON end_station.station_code = trips.end_station_code
+                                        AND end_station.yearid = trips.yearid
 INNER JOIN dim_weather AS weather ON weather.`date` = trips.start_date

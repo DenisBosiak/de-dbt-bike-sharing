@@ -1,11 +1,5 @@
 {{ config(materialized='view') }}
 
-with BikeTrips as
-(
-    SELECT *
-    FROM {{ source('staging', 'sharing_trips') }}
-)
-
 SELECT
     CAST(start_date AS date) AS start_date,		
     CAST(start_time AS time) AS start_time,
@@ -16,7 +10,7 @@ SELECT
     CAST(duration_sec AS FLOAT64) AS duration_sec,			
     CAST(is_member AS int) AS is_member,			
     CAST(yearid AS int) AS yearid			
-FROM BikeTrips
+FROM {{ source('staging', 'sharing_trips') }}
 -- dbt var: is_test_run
 {% if var('is_test_run', default=true) %}
 
