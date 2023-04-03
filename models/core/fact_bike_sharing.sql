@@ -31,6 +31,7 @@ SELECT
     end_station.longitude AS end_station_longitude,  
     trips.duration_sec,
     trips.is_member,
+    trips.is_member_description,
     weather.precipitation,
     weather.specific_humidity,			
     weather.relative_humidity,		
