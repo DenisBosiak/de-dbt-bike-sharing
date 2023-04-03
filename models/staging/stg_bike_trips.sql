@@ -11,6 +11,8 @@ SELECT
     CAST(is_member AS int) AS is_member,			
     CAST(yearid AS int) AS yearid			
 FROM {{ source('staging', 'sharing_trips') }}
+WHERE start_date >= '2011-01-01'
+    AND start_date < '2021-01-01'
 -- dbt var: is_test_run
 {% if var('is_test_run', default=true) %}
 
