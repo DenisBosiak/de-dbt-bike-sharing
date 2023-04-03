@@ -8,7 +8,8 @@ SELECT
     CAST(end_time AS time) AS end_time,
     CAST(end_station_code AS int) AS end_station_code,			
     CAST(duration_sec AS FLOAT64) AS duration_sec,			
-    CAST(is_member AS int) AS is_member,			
+    CAST(is_member AS int) AS is_member,	
+    {{ get_driver_type_description('is_member') }} AS is_member_description,	
     CAST(yearid AS int) AS yearid			
 FROM {{ source('staging', 'sharing_trips') }}
 WHERE start_date >= '2011-01-01'
